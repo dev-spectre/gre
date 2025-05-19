@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
+import { Roboto_Condensed } from "next/font/google";
 import "./globals.css";
+
+const robotoCondensed = Roboto_Condensed();
 
 export const metadata: Metadata = {
   title: "GRE",
@@ -16,7 +19,7 @@ export default function RootLayout({
       <head>
         <meta name="darkreader-lock" />
       </head>
-      <body className="antialiased">{children}</body>
+      <body className={`${robotoCondensed.className} antialiased`}>{children}</body>
     </html>
   );
 }
