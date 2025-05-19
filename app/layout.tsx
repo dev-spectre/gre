@@ -1,8 +1,23 @@
 import type { Metadata } from "next";
-import { Roboto_Condensed } from "next/font/google";
+import { Roboto_Condensed, Inter, Poppins } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
 
-const robotoCondensed = Roboto_Condensed();
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
+
+const robotoCondensed = Roboto_Condensed({
+  subsets: ["latin"],
+  variable: "--font-roboto",
+});
+
+const poppins = Poppins({
+  weight: ["400"],
+  subsets: ["latin"],
+  variable: "--font-poppins",
+});
 
 export const metadata: Metadata = {
   title: "GRE",
@@ -15,11 +30,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${robotoCondensed.variable} ${poppins.variable}`}>
       <head>
         <meta name="darkreader-lock" />
       </head>
-      <body className={`${robotoCondensed.className} antialiased`}>{children}</body>
+      <body className="antialiased bg-black">
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }
