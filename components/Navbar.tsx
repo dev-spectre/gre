@@ -9,24 +9,24 @@ export default function Navbar() {
         </Link>
         <ul className="font-inter flex gap-12 text-2xl font-[600]">
           <li>
-            <Link href="#" className="underline hover:underline">
+            <a href="#" className="underline hover:underline">
               Home
-            </Link>
+            </a>
           </li>
           <li>
-            <Link href="#about" className="hover:underline">
+            <a href="#about" className="hover:underline">
               About
-            </Link>
+            </a>
           </li>
           <li>
-            <Link href="#courses" className="hover:underline">
+            <a href="#courses" className="hover:underline">
               Courses
-            </Link>
+            </a>
           </li>
           <li>
-            <Link href="#testimonials" className="hover:underline">
+            <a href="#testimonials" className="hover:underline">
               Testimonials
-            </Link>
+            </a>
           </li>
         </ul>
         <Link
