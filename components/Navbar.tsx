@@ -1,33 +1,40 @@
+import Link from "next/link";
+
 export default function Navbar() {
   return (
-    <div className="backdrop-blur">
-      <nav className="px-5 py-6 container mx-auto text-white flex justify-between">
-        <a href="/" className="font-[900] text-2xl font-roboto">GRE NextEra</a>
-        <ul className="flex gap-12 font-inter font-[600] text-xl">
+    <div className="absolute top-0 right-0 left-0 z-30 backdrop-blur">
+      <nav className="container mx-auto flex justify-between px-5 py-6 text-white">
+        <Link href="/" className="font-roboto text-2xl font-[900]">
+          GRE NextEra
+        </Link>
+        <ul className="font-inter flex gap-12 text-2xl font-[600]">
           <li>
-            <a href="#" className="underline hover:underline">
+            <Link href="#" className="underline hover:underline">
               Home
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#about" className="hover:underline">
+            <Link href="#about" className="hover:underline">
               About
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#courses" className="hover:underline">
+            <Link href="#courses" className="hover:underline">
               Courses
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#testimonials" className="hover:underline">
+            <Link href="#testimonials" className="hover:underline">
               Testimonials
-            </a>
+            </Link>
           </li>
         </ul>
-        <a href="#" className="font-poppins rounded-md border border-white py-1 px-3">
+        <Link
+          href="#"
+          className="font-poppins rounded-md border border-white px-3 py-1 text-lg font-[400]"
+        >
           Login
-        </a>
+        </Link>
       </nav>
     </div>
   );
