@@ -46,8 +46,11 @@ export function CourseFeaturesCard() {
       </p>
 
       <ul className="my-8">
-        {features.map((feature) => (
-          <li className="mt-2 flex items-center gap-2.5 border-b border-b-[#1B438F80] pb-2">
+        {features.map((feature, i) => (
+          <li
+            key={i}
+            className="mt-2 flex items-center gap-2.5 border-b border-b-[#1B438F80] pb-2"
+          >
             <div className="min-h-8 min-w-8 gap-2.5 rounded-full border border-[#FF9053]"></div>
             <p className="text-[#211C37]">{feature}</p>
           </li>
