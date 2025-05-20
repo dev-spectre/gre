@@ -120,3 +120,69 @@ export function FooterNav() {
     </div>
   );
 }
+
+export function Sidebar() {
+  return (
+    <>
+      <aside className="group border-r border-r-[#E5E5E5] row-span-2 inline-block min-h-[100lvh] min-w-24 bg-white px-6.5 pt-8.5">
+        <label htmlFor="menu-btn" className="mb-8 ml-2 inline-block">
+          <img src="/icons/menu.png" alt="" />
+        </label>
+        <input type="checkbox" id="menu-btn" className="peer hidden" />
+        <nav className="peer-[:not(:checked)]:min-w-44">
+          <ul className="space-y-3">
+            <li>
+              <a
+                href="#"
+                className="flex items-center gap-2 rounded bg-[#1B438F1A] px-2 py-2"
+              >
+                <img src="/icons/view-grid.png" alt="" />
+                <p>Dashboard</p>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="flex items-center gap-2 rounded px-2 py-2 hover:bg-[#1B438F1A]"
+              >
+                <img src="/icons/class-lesson.png" alt="" />
+                <p>Courses</p>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="flex items-center gap-2 rounded px-2 py-2 hover:bg-[#1B438F1A]"
+              >
+                <img src="/icons/university.png" alt="" />
+                <p>Universites</p>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="flex items-center gap-2 rounded px-2 py-2 hover:bg-[#1B438F1A]"
+              >
+                <img src="/icons/documents.png" alt="" />
+                <p>Documents</p>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="flex items-center gap-2 rounded px-2 py-2 hover:bg-[#1B438F1A]"
+              >
+                <img
+                  className="-ml-1 h-7"
+                  src="/icons/exam-multiple-choice.png"
+                  alt=""
+                />
+                <p>Mock test</p>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+    </>
+  );
+}
