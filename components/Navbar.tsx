@@ -30,7 +30,7 @@ export default function Navbar() {
           </li>
         </ul>
         <Link
-          href="#"
+          href="/dashboard"
           className="font-poppins rounded-md border border-white px-3 py-1 text-lg font-[400]"
         >
           Login
