@@ -4,7 +4,7 @@ import { HeroAnimation } from "./Animations";
 export default function Hero() {
   return (
     <div className="bg-gradient-to-b from-[#081329] to-[#1b428e]">
-      <section className="container mx-auto flex min-h-[100lvh] items-center justify-between px-5 text-white">
+      <section className="container mx-auto grid grid-cols-2 min-h-[100lvh] items-center justify-between px-5 text-white">
         <header className="w-full">
           <h1 className="font-roboto text-7xl font-[900] text-[#FF9053] uppercase">
             GRE 330 courses
