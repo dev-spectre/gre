@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { Roboto_Condensed, Inter, Poppins } from "next/font/google";
+import {
+  Roboto_Condensed,
+  Inter,
+  Poppins,
+  Roboto_Flex,
+} from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 
@@ -14,9 +19,14 @@ const robotoCondensed = Roboto_Condensed({
 });
 
 const poppins = Poppins({
-  weight: ["400"],
+  weight: ["400", "600"],
   subsets: ["latin"],
   variable: "--font-poppins",
+});
+
+const robotoFlex = Roboto_Flex({
+  subsets: ["latin"],
+  variable: "--font-roboto-flex",
 });
 
 export const metadata: Metadata = {
@@ -30,11 +40,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${robotoCondensed.variable} ${poppins.variable}`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${robotoCondensed.variable} ${poppins.variable} ${robotoFlex.variable}`}
+    >
       <head>
         <meta name="darkreader-lock" />
       </head>
-      <body className="antialiased bg-black">
+      <body className="bg-blue-400 antialiased">
         <Navbar />
         {children}
       </body>
