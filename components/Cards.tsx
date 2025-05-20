@@ -36,7 +36,7 @@ export function CourseFeaturesCard() {
   ];
 
   return (
-    <article className="font-inter bg-white inline-block rounded-3xl px-32 py-12 text-lg font-[400] shadow-lg shadow-[#1B438F4D]">
+    <article className="font-inter inline-block rounded-3xl bg-white px-32 py-12 text-lg font-[400] shadow-lg shadow-[#1B438F4D]">
       <h2 className="font-roboto text-4xl font-[900] text-[#1B438F] uppercase">
         GRE 330 Course
       </h2>
@@ -47,14 +47,16 @@ export function CourseFeaturesCard() {
 
       <ul className="my-8">
         {features.map((feature) => (
-          <li className="flex items-center mt-2 gap-2.5 border-b border-b-[#1B438F80] pb-2">
+          <li className="mt-2 flex items-center gap-2.5 border-b border-b-[#1B438F80] pb-2">
             <div className="h-8 w-8 gap-2.5 rounded-full border border-[#FF9053]"></div>
             <p className="text-[#211C37]">{feature}</p>
           </li>
         ))}
       </ul>
 
-      <Button label="Subscribe now" />
+      <div className="text-white">
+        <Button label="Subscribe now" />
+      </div>
     </article>
   );
 }
