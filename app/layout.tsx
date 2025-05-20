@@ -19,7 +19,7 @@ const robotoCondensed = Roboto_Condensed({
 });
 
 const poppins = Poppins({
-  weight: ["400", "600"],
+  weight: ["300", "400", "600"],
   subsets: ["latin"],
   variable: "--font-poppins",
 });
@@ -47,7 +47,7 @@ export default function RootLayout({
       <head>
         <meta name="darkreader-lock" />
       </head>
-      <body className="bg-blue-400 antialiased">
+      <body className="antialiased">
         <Navbar />
         {children}
       </body>
