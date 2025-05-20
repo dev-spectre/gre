@@ -6,7 +6,6 @@ import {
 } from "@/components/Cards";
 import { LeadGenerationForm } from "@/components/Forms";
 import Hero from "@/components/Hero";
-import Link from "next/link";
 
 export default function Home() {
   const tableData = [
