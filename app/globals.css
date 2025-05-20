@@ -6,4 +6,10 @@
   --font-poppins: var(--font-poppins), "sans-serif";
   --font-roboto-flex: var(--font-roboto-flex), "sans-serif";
   --font-urbanist: var(--font-urbanist), "sans-serif";
+  --font-poetsen-one: var(--font-poetsen-one), "sans-serif";
+  --font-montserrat: var(--font-montserrat), "sans-serif";
+}
+
+aside:has(#menu-btn:checked)  p {
+  display: none;
 }
