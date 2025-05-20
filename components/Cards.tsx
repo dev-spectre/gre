@@ -48,7 +48,7 @@ export function CourseFeaturesCard() {
       <ul className="my-8">
         {features.map((feature) => (
           <li className="mt-2 flex items-center gap-2.5 border-b border-b-[#1B438F80] pb-2">
-            <div className="h-8 w-8 gap-2.5 rounded-full border border-[#FF9053]"></div>
+            <div className="min-h-8 min-w-8 gap-2.5 rounded-full border border-[#FF9053]"></div>
             <p className="text-[#211C37]">{feature}</p>
           </li>
         ))}
@@ -57,6 +57,64 @@ export function CourseFeaturesCard() {
       <div className="text-white">
         <Button label="Subscribe now" />
       </div>
+    </article>
+  );
+}
+
+interface TestimonialCardProps {
+  title: string;
+  description: string;
+  greScore: number | `${number}`;
+  name: string;
+  linkedin: string;
+  designation: string;
+  imgSrc: string;
+  caption?: boolean;
+}
+
+export function TestimonialCard({
+  title,
+  description,
+  greScore,
+  name,
+  designation,
+  linkedin,
+  imgSrc,
+  caption,
+}: TestimonialCardProps) {
+  return (
+    <article className="font-urbanist relative grid min-h-[450px] max-w-5xl grid-cols-10 gap-12 rounded-2xl bg-white px-30 py-14.5">
+      <div className="relative col-span-4">
+        <img
+          className="absolute top-0 -left-5"
+          src="/icons/quote.png"
+          alt="quote"
+        />
+        <img
+          className="absolute top-10 h-[120%] max-w-[300px] rounded-full object-cover"
+          src={imgSrc}
+          alt={name}
+        />
+      </div>
+      <section className="col-span-6">
+        <h3 className="mb-6 text-3xl font-[800]">{title}</h3>
+        <p className="mb-12 text-xl font-[600] text-[#626262] italic">
+          {description}
+        </p>
+        <div className="mb-3.5 flex gap-13 text-[#1B438F]">
+          <p className="text-4xl font-[900]">{greScore}/330</p>
+          <a href={linkedin}>
+            <img src="/icons/linkedin.svg" alt="LinkedIn" />
+          </a>
+        </div>
+        <p className="text-2xl font-[900]">{name}</p>
+        <p className="text-lg font-[500] text-[#21967B]">{designation}</p>
+      </section>
+      {caption && (
+        <p className="font-roboto absolute right-0 -bottom-15 text-4xl font-[900] text-white">
+          Our Student, Our Pride
+        </p>
+      )}
     </article>
   );
 }
