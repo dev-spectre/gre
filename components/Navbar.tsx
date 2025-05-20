@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <div className="absolute top-0 right-0 left-0 z-30 backdrop-blur">
+    <div className="fixed top-0 right-0 left-0 z-30 backdrop-blur">
       <nav className="container mx-auto flex justify-between px-5 py-6 text-white">
         <Link href="/" className="font-roboto text-2xl font-[900]">
           GRE NextEra
