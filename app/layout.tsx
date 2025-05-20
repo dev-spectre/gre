@@ -4,6 +4,7 @@ import {
   Inter,
   Poppins,
   Roboto_Flex,
+  Urbanist,
 } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -29,6 +30,12 @@ const robotoFlex = Roboto_Flex({
   variable: "--font-roboto-flex",
 });
 
+const urbanist = Urbanist({
+  weight: ["500", "600", "800", "900"],
+  subsets: ["latin"],
+  variable: "--font-urbanist",
+});
+
 export const metadata: Metadata = {
   title: "GRE",
   description: "World's Most Affordable Complete GRE Prep at 599/- per month.",
@@ -42,7 +49,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${robotoCondensed.variable} ${poppins.variable} ${robotoFlex.variable}`}
+      className={`${inter.variable} ${robotoCondensed.variable} ${poppins.variable} ${robotoFlex.variable} ${urbanist.variable}`}
     >
       <head>
         <meta name="darkreader-lock" />
