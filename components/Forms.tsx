@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export function LeadGenerationForm() {
   return (
-    <div className="to-black-40 inline-block rounded-xl bg-black/20 bg-gradient-to-b from-black/20 via-black/15 to-black/20 px-8 py-11 text-white backdrop:blur-2xl">
+    <div className="to-black-40 inline-block rounded-xl max-w-lg w-full bg-black/20 bg-gradient-to-b from-black/20 via-black/15 to-black/20 px-8 py-11 text-white backdrop:blur-2xl">
       <h2 className="font-roboto mb-6 text-4xl font-[900] capitalize">
         Get free <span className="uppercase">GRE</span> strategy
       </h2>
