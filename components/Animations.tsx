@@ -7,6 +7,7 @@ export function HeroAnimation() {
       src="/animations/hero-animation.lottie"
       loop
       autoplay
+      className="w-[70%] mx-auto"
     />
   );
 }
