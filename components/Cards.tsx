@@ -121,3 +121,48 @@ export function TestimonialCard({
     </article>
   );
 }
+
+interface CourseCardProps {
+  title: string;
+  articles: number | `${number}`;
+  assignments: number | `${number}`;
+  members: number | `${number}`;
+  imgSrc: string;
+  className: string;
+}
+
+export function CourseCard({
+  title,
+  articles,
+  assignments,
+  members,
+  imgSrc,
+  className,
+}: CourseCardProps) {
+  return (
+    <article className={`flex-grow rounded-lg px-1.5 pt-5 pb-1.5 ${className}`}>
+      <div className="mx-3.5 mb-2">
+        <div className="mb-3.5 flex h-10 w-10 items-center justify-center rounded-full bg-white">
+          <img className="h-6 w-6" src={imgSrc} alt="" />
+        </div>
+        <h4 className="text-sm">{title}</h4>
+      </div>
+      <div className="flex justify-between rounded-md bg-white/70 px-5 py-1">
+        <div className="flex items-center gap-1.5">
+          <img src="/icons/book.png" alt="articles" />
+          <span>{articles}</span>
+        </div>
+        <div className={`${className} min-w-0.5 rounded-full`}></div>
+        <div className="flex items-center gap-1.5">
+          <img src="/icons/tasks.png" alt="assignments" />
+          <span>{assignments}</span>
+        </div>
+        <div className={`${className} min-w-0.5 rounded`}></div>
+        <div className="flex items-center gap-1.5">
+          <img src="/icons/people.png" alt="members" />
+          <span>{members}</span>
+        </div>
+      </div>
+    </article>
+  );
+}
