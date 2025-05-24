@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useRef } from "react";
 import {
   BarChart,
   Bar,
@@ -10,6 +11,7 @@ import {
   RadialBarChart,
   RadialBar,
   PolarAngleAxis,
+  ReferenceDot,
 } from "recharts";
 
 export function HourSpent() {
@@ -57,7 +59,7 @@ export function HourSpent() {
   ];
 
   return (
-    <div className="w-full rounded-lg border border-[#E5E7E9] bg-white py-4">
+    <div className="w-full rounded-lg border border-[#E5E7E9] bg-white py-4 pr-5">
       <div className="mb-3 flex flex-wrap gap-4 px-5 text-xs text-[#999999]">
         <div className="flex items-center gap-1.5">
           <div className="h-4 w-4 rounded bg-[#FF9053]"></div>
@@ -69,7 +71,7 @@ export function HourSpent() {
         </div>
       </div>
       <ResponsiveContainer width={"100%"} height={325}>
-        <BarChart data={data} width={500} height={500}>
+        <BarChart data={data}>
           <CartesianGrid
             strokeDasharray={"5 5"}
             strokeWidth={"2"}
@@ -129,11 +131,16 @@ export function HourSpent() {
 }
 
 export function Performance() {
+  const maxPoints = 15;
   const pointProgress = 8.966;
   const circleSize = 300;
+  const endAngle = -40;
+  const startAngle = 220;
+
+  useEffect(() => {});
 
   return (
-    <div className="w-full relative rounded-lg border border-[#E5E7E9] bg-white py-4">
+    <div className="relative w-full rounded-lg border border-[#E5E7E9] bg-white py-4">
       <div className="mb-3 flex flex-wrap justify-between gap-4 px-5 text-xs text-[#999999]">
         <div className="flex items-center gap-1.5">
           <div className="h-4 w-4 rounded bg-[#45A8A3]"></div>
@@ -158,34 +165,37 @@ export function Performance() {
           </svg>
         </button>
       </div>
-      <RadialBarChart
-        className="mx-auto"
-        height={circleSize - 12}
-        width={circleSize}
-        startAngle={220}
-        endAngle={-40}
-        data={[{ pointProgress }]}
-        innerRadius={"85%"}
-        outerRadius={"100%"}
-      >
-        <RadialBar
-          dataKey={"pointProgress"}
-          fill="#45A8A3"
-          background={{ fill: "#F8EFE2" }}
-          cornerRadius={circleSize / 2}
-        />
-        <PolarAngleAxis type="number" domain={[0, 15]} tick={false} />
-      </RadialBarChart>
+      <ResponsiveContainer height={300} width={"100%"}>
+        <RadialBarChart
+          id="radialChart"
+          startAngle={startAngle}
+          endAngle={endAngle}
+          data={[{ pointProgress }]}
+          innerRadius={"85%"}
+          outerRadius={"100%"}
+        >
+          <RadialBar
+            id="radialBar"
+            dataKey={"pointProgress"}
+            fill="#45A8A3"
+            background={{ fill: "#F8EFE2" }}
+            cornerRadius={circleSize / 2}
+          />
+          <PolarAngleAxis type="number" domain={[0, maxPoints]} tick={false} />
+        </RadialBarChart>
+      </ResponsiveContainer>
 
-      <div className="absolute origin-[50%_84%] rotate-15 z-10 w-min bottom-30 right-[50%] translate-x-[50%]">
-        <div className="relative mx-auto mb-1 h-12 w-[70%] overflow-hidden bg-gradient-to-b from-[#FF9053] to-[#FF905300]">
-          <div className="absolute -left-[100%] h-[120%] w-full origin-bottom-right rotate-[7deg] bg-white"></div>
-          <div className="absolute -right-[100%] h-[120%] w-full origin-bottom-left -rotate-[7deg] bg-white"></div>
+      <div
+        id="needle"
+        className="absolute right-[50%] bottom-[32%] z-10 w-[min(24px,7%)] origin-[50%_84%] translate-x-[50%] -rotate-[110deg] overflow-hidden pt-1"
+      >
+        <div className="clip-triangle relative mx-auto mb-1 aspect-[1/3.5] w-[70%] bg-gradient-to-b from-[#FF9053] to-[#FF905300]"></div>
+        <div className="relative flex aspect-square items-center justify-center rounded-full bg-[#FF9053]">
+          <div className="aspect-square w-[60%] rounded-full bg-white"></div>
         </div>
-        <div className="h-6 w-6 rounded-full border-5 border-[#FF9053]"></div>
       </div>
 
-      <p className="relative text-center text-xs text-[#83868E]">
+      <p className="relative -mt-[12px] text-center text-xs text-[#83868E]">
         <span className="relative bottom-0.5 mr-2">Your point:</span>
         <span className="text-base text-black">{pointProgress}</span>
       </p>
