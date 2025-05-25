@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useCallback } from "react";
 import {
   BarChart,
   Bar,
@@ -11,7 +11,6 @@ import {
   RadialBarChart,
   RadialBar,
   PolarAngleAxis,
-  ReferenceDot,
 } from "recharts";
 
 export function HourSpent() {
@@ -98,12 +97,14 @@ export function HourSpent() {
             fill="#FF9053"
             stackId={1}
             radius={[0, 0, 10, 10]}
+            isAnimationActive={false}
           />
           <Bar
             dataKey={"exam"}
             fill="#F8EFE2"
             stackId={1}
             radius={[10, 10, 0, 0]}
+            isAnimationActive={false}
           />
           <Tooltip
             cursor={false}
@@ -137,7 +138,24 @@ export function Performance() {
   const endAngle = -40;
   const startAngle = 220;
 
-  useEffect(() => {});
+  const handleAnimationEnd = useCallback(() => {
+    const radialBarProgress = document.getElementById("radial-bar");
+    const radialBarBackground = document.querySelector(
+      ".recharts-radial-bar-background",
+    );
+    if (!(radialBarBackground && radialBarProgress)) return;
+
+    const circle = getCircleFromElement(radialBarBackground);
+    const angleProgress = getAngleProgress(
+      pointProgress,
+      maxPoints,
+      startAngle,
+      endAngle,
+    );
+
+    const target = getTargetCoordinates(circle, angleProgress);
+    pointNeedleToTarget(target);
+  }, []);
 
   return (
     <div className="relative w-full rounded-lg border border-[#E5E7E9] bg-white py-4">
@@ -167,19 +185,21 @@ export function Performance() {
       </div>
       <ResponsiveContainer height={300} width={"100%"}>
         <RadialBarChart
-          id="radialChart"
+          id="radial-chart"
           startAngle={startAngle}
           endAngle={endAngle}
-          data={[{ pointProgress }]}
+          data={[{ pointProgress: Math.max(pointProgress, 0.5) }]}
           innerRadius={"85%"}
           outerRadius={"100%"}
         >
           <RadialBar
-            id="radialBar"
+            id="radial-bar"
             dataKey={"pointProgress"}
             fill="#45A8A3"
             background={{ fill: "#F8EFE2" }}
             cornerRadius={circleSize / 2}
+            animationDuration={0}
+            onAnimationEnd={handleAnimationEnd}
           />
           <PolarAngleAxis type="number" domain={[0, maxPoints]} tick={false} />
         </RadialBarChart>
@@ -187,7 +207,7 @@ export function Performance() {
 
       <div
         id="needle"
-        className="absolute right-[50%] bottom-[32%] z-10 w-[min(24px,7%)] origin-[50%_84%] translate-x-[50%] -rotate-[110deg] overflow-hidden pt-1"
+        className="absolute right-[50%] bottom-[33%] z-10 w-[min(24px,7%)] origin-[50%_84.6938776%] translate-x-[50%] overflow-hidden"
       >
         <div className="clip-triangle relative mx-auto mb-1 aspect-[1/3.5] w-[70%] bg-gradient-to-b from-[#FF9053] to-[#FF905300]"></div>
         <div className="relative flex aspect-square items-center justify-center rounded-full bg-[#FF9053]">
@@ -197,8 +217,68 @@ export function Performance() {
 
       <p className="relative -mt-[12px] text-center text-xs text-[#83868E]">
         <span className="relative bottom-0.5 mr-2">Your point:</span>
-        <span className="text-base text-black">{pointProgress}</span>
+        <span className="text-base text-black">{pointProgress.toFixed(3)}</span>
       </p>
     </div>
   );
+}
+
+interface Circle {
+  radius: number;
+  x: number;
+  y: number;
+}
+
+function getCircleFromElement(element: Element): Circle {
+  const clientRect = element.getBoundingClientRect();
+  const radius = clientRect.width / 2;
+  const y = clientRect.y + radius;
+  const x = clientRect.x + radius;
+  return { radius, x, y };
+}
+
+function getAngleProgress(
+  points: number,
+  maxPoints: number,
+  startAngle: number,
+  endAngle: number,
+): number {
+  const angleProgress =
+    (startAngle - (points / maxPoints) * (startAngle - endAngle) + 360) % 360;
+
+  return angleProgress;
+}
+
+interface CartesianPoint {
+  x: number;
+  y: number;
+}
+
+function getTargetCoordinates(
+  circle: Circle,
+  angleProgress: number,
+): CartesianPoint {
+  const angleProgressInRadians = angleProgress * (Math.PI / 180);
+
+  const x = circle.x + circle.radius * Math.cos(angleProgressInRadians);
+  const y = circle.y + circle.radius * Math.sin(-angleProgressInRadians);
+
+  return { x, y };
+}
+
+function pointNeedleToTarget(target: CartesianPoint) {
+  const needle = document.getElementById("needle");
+  const needleBase = needle?.lastElementChild;
+  if (!(needle && needleBase)) return;
+
+  const baseRect = needleBase.getBoundingClientRect();
+  const originX = baseRect.x + baseRect.width / 2;
+  const originY = baseRect.y + baseRect.height / 2;
+
+  const targetTransformedX = target.x - originX;
+  const targetTransformedY = target.y - originY;
+
+  const polarAngle = Math.atan2(targetTransformedY, targetTransformedX);
+  const angleInDegree = (polarAngle * 180) / Math.PI + 90;
+  needle.style.rotate = `${angleInDegree}deg`;
 }

@@ -78,7 +78,7 @@ export default function Dashboard() {
           <HourSpent />
         </article>
         <article>
-          <h2 className="mt-4.5 mb-3.5">Point Progress</h2>
+          <h2 className="mt-4.5 mb-3.5">Performance</h2>
           <Performance />
         </article>
       </section>
